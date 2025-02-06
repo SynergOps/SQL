@@ -37,7 +37,7 @@ CREATE TABLE `wallet_addr` (
   `date_of_creation` date DEFAULT NULL,
   `bitcoin_addr` varchar(50) DEFAULT NULL,
   `btc` decimal(12,7) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `wallet_addr`
