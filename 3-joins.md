@@ -1,5 +1,6 @@
-Create a database named `wallets` (e.g. with phpmyadmin), and import the wallet_addr.sql
-Use the new imported database
+# Lets learn how to JOIN tables to show joined data
+
+Use the previously imported database
 ```sql
 USE wallets;
 ```

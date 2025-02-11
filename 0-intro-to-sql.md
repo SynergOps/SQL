@@ -1,3 +1,5 @@
+# Lets learn how to create a database and add data 
+
 Create a new database
 ```sql
 CREATE DATABASE my_database;
