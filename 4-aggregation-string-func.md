@@ -1,5 +1,6 @@
-Create a database named `wallet_addr` (e.g. with phpmyadmin), and import the wallet_addr.sql
-Use the new imported database
+# Lets learn how to aggregate and do some text manipulation
+
+Use the previously imported database
 ```sql
 USE wallet_addr;
 ```

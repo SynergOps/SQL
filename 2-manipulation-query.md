@@ -1,6 +1,6 @@
-Create a database named `wallets` (e.g. with phpmyadmin), and import the wallet_addr.sql
+# Lets how to manage tables
 
-Use the new imported database
+Use the previously imported database
 ```sql
 USE wallets;
 ```

@@ -1,3 +1,5 @@
+# Lets learn some basic queries to retrive data
+
 Create a database named `wallets` (e.g. with phpmyadmin), and import the wallet_addr.sql
 
 Use the new imported database
