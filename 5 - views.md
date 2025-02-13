@@ -1,4 +1,4 @@
-## Lets learn about SQL Views
+# Lets learn about SQL Views
 
 Create a database named `wallet_addr` (e.g. with phpmyadmin), and import the wallet_addr.sql
 Use the new imported database

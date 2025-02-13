@@ -1,4 +1,4 @@
-## Lets learn about computed columns in MySQL
+# Lets learn about computed columns in MySQL
 
 Computed columns are columns that are not stored in the table but are computed on the fly
 They are calculated based on other columns in the table

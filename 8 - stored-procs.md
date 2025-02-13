@@ -1,4 +1,4 @@
-## Lets learn about stored procedures
+# Lets learn about stored procedures
 
 Stored procedures are a way to store SQL code that you want to run over and over again
 They are precompiled and stored in the database, so they are faster than running the same SQL code over and over again

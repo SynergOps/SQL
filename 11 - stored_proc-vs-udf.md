@@ -1,3 +1,5 @@
+# What are the key considerations for using UDF vs Stored Procedures
+
 When deciding between using a stored procedure or a user-defined function (UDF) in your
 application development, consider the following structured approach to make an informed
 choice:
