@@ -1,4 +1,4 @@
-## Lets learn about triggers
+# Lets learn about triggers
 Triggers are a way to execute a set of commands when an event occurs on a table.
 The event can be an insert, update or delete in a table.
 The commands can be a set of SQL commands or a call to a stored procedure.

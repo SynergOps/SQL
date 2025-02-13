@@ -1,4 +1,4 @@
-## Lets learn how to change the Collate, Character Set and storage engine in MySQL
+# Lets learn how to change the Collate, Character Set and storage engine in MySQL
 
 First lets see the current character set and collate of the database and table of `some_database` and `some_table`
 ```sql
