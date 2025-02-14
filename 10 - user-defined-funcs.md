@@ -129,6 +129,10 @@ system-specific operations
    ```
    '% max_connections=100'
    ```
+   - Check the Data types of the columns
+   ```sql
+   DESCRIBE wallet_addr;
+   ```
 ### Custom UDFs Using Third-Party Languages
 
 MySQL supports UDFs written in various languages, such as:
