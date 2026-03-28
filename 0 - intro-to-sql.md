@@ -4,14 +4,11 @@ Create a new database
 ```sql
 CREATE DATABASE my_database;
 ```
-Use the new database
-```sql
-USE my_database;
-```
+Connect to the new database (`wallets` in this repository examples).
 Create a new table
 ```sql
 CREATE TABLE my_table (
-  column0 INTEGER PRIMARY KEY AUTOINCREMENT,
+  column0 INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   column1 INTEGER,
   column2 VARCHAR(50),
   column3 DATE

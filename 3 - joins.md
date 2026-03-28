@@ -1,9 +1,6 @@
 # Lets learn how to JOIN tables to show joined data
 
-Use the previously imported database
-```sql
-USE wallets;
-```
+Use the previously imported database (`wallets`).
 Types of Join
 1. INNER JOIN
 2. OUTER JOIN
@@ -11,16 +8,16 @@ Types of Join
 
 INNER JOIN
 There should be a common column between the two tables to join them
-In this case, the common column is `wallet_id` because it is present in both tables
+In this case, the common column is `customer_id` because it is present in both tables
 
 first lets create a new table from the wallet_addr table with only the columns we need
 ```sql
 CREATE TABLE customer_wallets AS
 SELECT
-    customer_id AS `Customer ID`,
-    bitcoin_addr AS 'Wallet Address',
-    btc AS 'Balance',
-    date_of_creation AS 'Created At'
+    customer_id,
+    bitcoin_addr AS wallet_address,
+    btc AS balance,
+    date_of_creation AS created_at
 FROM
     wallet_addr;
 ```
@@ -45,12 +42,12 @@ This query retrieves the first name, last name, wallet address, and balance for 
 SELECT
     wa.first_name,
     wa.last_name,
-    cw.`Wallet Address`,
-    cw.Balance
+    cw.wallet_address,
+    cw.balance
 FROM
     wallet_addr wa
 INNER JOIN customer_wallets cw ON
-    wa.customer_id = cw.`Customer ID`
+    wa.customer_id = cw.customer_id
 ```
 
 OUTER JOIN (if you don't find a match, you still want to see the row but with NULL values)
@@ -73,23 +70,23 @@ Empty some rows from the customer_wallets table
 UPDATE
     customer_wallets
 SET
-    `Wallet Address` = NULL,
-    Balance = NULL,
-    `Created At` = NULL
+    wallet_address = NULL,
+    balance = NULL,
+    created_at = NULL
 WHERE
-    Balance > 19000
+    balance > 19000
 ```
 Now we can join the two tables, wallet_addr and customer_wallets, using the LEFT JOIN.
 ```sql
 SELECT
     wa.first_name,
     wa.last_name,
-    cw.`Wallet Address`,
-    cw.Balance
+    cw.wallet_address,
+    cw.balance
 FROM
     wallet_addr wa
 LEFT JOIN customer_wallets cw ON
-    wa.customer_id = cw.`Customer ID`
+    wa.customer_id = cw.customer_id
 ```
 OUTER RIGHT JOIN
 This query retrieves the first name, last name, wallet address, and balance for each customer
@@ -114,12 +111,12 @@ SELECT
     wa.customer_id,
     wa.first_name,
     wa.last_name,
-    cw.`Wallet Address`,
-    cw.Balance
+    cw.wallet_address,
+    cw.balance
 FROM
     wallet_addr wa  
 RIGHT JOIN customer_wallets cw ON
-    wa.customer_id = cw.`Customer ID`
+    wa.customer_id = cw.customer_id
 ```
 CROSS JOIN
 Cartesian product of two tables, i.e. all possible combinations of rows from both tables. Meaning 
@@ -132,8 +129,8 @@ SELECT
     wa.customer_id,
     wa.first_name,
     wa.last_name,
-    cw.`Wallet Address`,
-    cw.Balance
+    cw.wallet_address,
+    cw.balance
 FROM
     wallet_addr wa
 CROSS JOIN customer_wallets cw
