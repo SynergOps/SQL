@@ -42,6 +42,32 @@ This repository assumes that you know how to install an RDBMS and use a SQL clie
    - Import the portable seed file (`wallet_addr.portable.sql`) into your database
    - If you use MySQL/MariaDB, you can use the native dump wrapper (`wallet_addr.mysql.sql`)
 
+## Lessons Overview
+
+| # | Lesson | Dataset | Topics |
+|---|--------|---------|--------|
+| 0 | Intro to SQL | — | Database/table creation, INSERT, SELECT basics |
+| 1 | Simple Query | `wallet_addr` | SELECT, WHERE, DISTINCT, filtering |
+| 2 | Manipulation Query | `wallet_addr` | Aliasing, computed columns, CREATE TABLE AS, UPDATE, DELETE |
+| 3 | Joins | `wallet_addr` | INNER JOIN, LEFT JOIN, RIGHT JOIN, CROSS JOIN |
+| 4 | Aggregation & String Functions | `wallet_addr` | COUNT, SUM, AVG, MIN, MAX, string manipulation |
+| 5 | Views | `wallet_addr` | CREATE VIEW, virtual tables, query abstraction |
+| 6 | Triggers | `wallet_addr` | Event-driven logic, business rules, data integrity |
+| 7 | Computed Columns | `wallet_addr` | Generated columns, age calculations, date arithmetic |
+| 8 | Stored Procedures | `wallet_addr` | Reusable routines, parameters, encapsulation |
+| 9 | Collation, Character Set, Engine | `wallet_addr` | Database configuration, encoding, MySQL-specific features |
+| 10 | User-Defined Functions | `wallet_addr` | Scalar & aggregate functions, code reuse |
+| 11 | UDF vs Stored Procedures | — | Theory: when to use each pattern |
+| 12 | Common Table Expressions | `wallet_addr` | CTEs, WITH clauses, recursive queries, readability |
+| 13 | World Database Queries | `world` | Multi-table joins, window functions, CTEs, complex filtering |
+| 14 | Student Records | `iekstudents` | Data quality, aggregation, reporting, practical scenarios |
+
+## Available Datasets
+
+- **`wallet_addr`** (GetRekt Bitcoin custody scenario): 12 sample customers with wallet addresses and balances
+- **`world`** (Geography/demographics): 239 countries, ~4,000 cities, language data
+- **`iekstudents`** (Student meal preferences): Sample student records with dining preferences
+
 ## SQL Dialect Approach
 
 - The lessons use a PostgreSQL-safe default syntax.
