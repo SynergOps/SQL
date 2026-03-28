@@ -1,28 +1,25 @@
 # Lets how to manage tables
 
-Use the previously imported database
-```sql
-USE wallets;
-```
+Use the previously imported database (`wallets`).
 Show everybody from Greece with more than 500 BTC with named columns
 ```sql
-SELECT first_name AS 'First Name', last_name AS 'Last Name', btc AS 'BTC amount' 
+SELECT first_name AS first_name, last_name AS last_name, btc AS btc_amount
 FROM wallet_addr WHERE country = 'Greece' AND btc > 500;
 ```
 Show a new column with the sum of BTC
 ```sql
-SELECT first_name AS 'First Name', 
-    last_name AS 'Last Name', 
-    btc AS 'BTC amount', 
-    btc + 100 AS 'BTC amount + 100' 
+SELECT first_name AS first_name,
+    last_name AS last_name,
+    btc AS btc_amount,
+    btc + 100 AS btc_amount_plus_100
 FROM wallet_addr;
 ```
 Create a temporary table with the previous query and show the result from the temporary table
 ```sql
 CREATE TEMPORARY TABLE temp_wallet_addr_plus_100 AS SELECT
-    first_name AS 'First Name',
-    last_name AS 'Last Name',
-    btc + 100 AS 'BTC amount + 100'
+    first_name,
+    last_name,
+    btc + 100 AS btc_amount_plus_100
 FROM
     wallet_addr;
     -- Show the result from the temporary table
@@ -34,22 +31,23 @@ FROM
 Create a new table with the previous query
 ```sql
 CREATE TABLE wallet_addr_plus_100 AS SELECT
-    first_name AS 'First Name',
-    last_name AS 'Last Name',
-    btc + 100 AS 'BTC amount + 100'
-INTO @wallet_addr_plus_100
+    first_name,
+    last_name,
+    btc + 100 AS btc_amount_plus_100
 FROM
     wallet_addr;
 ```
 Create a new table with the previous query but with a primary key
 ```sql
-CREATE TABLE wallet_addr_plus_100 (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE wallet_addr_plus_100_with_id (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     btc_amount_plus_100 DECIMAL(12, 7) NOT NULL
-) AS SELECT NULL AS 
-    id,
+) ;
+
+INSERT INTO wallet_addr_plus_100_with_id (first_name, last_name, btc_amount_plus_100)
+SELECT
     first_name,
     last_name,
     btc + 100 AS btc_amount_plus_100

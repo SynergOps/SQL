@@ -1,10 +1,7 @@
 # Lets learn about SQL Views
 
-Create a database named `wallet_addr` (e.g. with phpmyadmin), and import the wallet_addr.sql
-Use the new imported database
-```sql
-USE wallet_addr;
-```
+Create a database named `wallets` (e.g. with phpmyadmin), and import the wallet_addr.sql.
+Use the new imported database (`wallets`).
 A view is a virtual table based on the result-set of an SQL statement.
 - A view contains rows and columns, just like a real table. 
 - The fields in a view are fields from one or more real tables in the database.
@@ -15,25 +12,25 @@ Create a view with the `wallet_addr_view` that will display first name, the wall
 ```sql
 CREATE VIEW wallet_addr_view AS SELECT
     wa.first_name,
-    cw.`Wallet Address`,
-    cw.Balance,
+    cw.wallet_address,
+    cw.balance,
     wa.email
 FROM
     wallet_addr wa
 INNER JOIN customer_wallets cw ON
-    wa.customer_id = cw.`Customer ID`;
+    wa.customer_id = cw.customer_id;
 ```
 Lets create a view for Whales customers only that have a balance greater than 20000
 ```sql
 CREATE VIEW whales_customers AS SELECT
     wa.first_name,
-    cw.`Wallet Address`,
-    cw.Balance,
+    cw.wallet_address,
+    cw.balance,
     wa.email
 FROM
     wallet_addr wa
 INNER JOIN customer_wallets cw ON
-    wa.customer_id = cw.`Customer ID`
+    wa.customer_id = cw.customer_id
 WHERE
-    cw.Balance > 20000
+    cw.balance > 20000
 ```
