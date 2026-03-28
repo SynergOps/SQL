@@ -14,12 +14,15 @@ CREATE TABLE my_table (
   column3 DATE
   );
 ```
+Dialect note:
+- MySQL/MariaDB: `column0 INT AUTO_INCREMENT PRIMARY KEY`
+- Microsoft SQL Server: `column0 INT IDENTITY(1,1) PRIMARY KEY`
 Insert data into the table
 ```sql
 INSERT INTO my_table (column1, column2, column3) 
 VALUES (42, 'A string', '2018-01-01');
 ```
-Retrive everything from the table / Query the table
+Retrieve everything from the table / Query the table
 ```sql
 SELECT * FROM my_table;
 ```

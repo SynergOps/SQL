@@ -1,6 +1,6 @@
 # Lets learn about SQL Views
 
-Create a database named `wallets` (e.g. with phpmyadmin), and import the wallet_addr.sql.
+Create a database named `wallets`, and import the wallet_addr.sql file.
 Use the new imported database (`wallets`).
 A view is a virtual table based on the result-set of an SQL statement.
 - A view contains rows and columns, just like a real table. 
@@ -20,7 +20,7 @@ FROM
 INNER JOIN customer_wallets cw ON
     wa.customer_id = cw.customer_id;
 ```
-Lets create a view for Whales customers only that have a balance greater than 20000
+Lets create a view for whale customers only that have a balance greater than 20000
 ```sql
 CREATE VIEW whales_customers AS SELECT
     wa.first_name,

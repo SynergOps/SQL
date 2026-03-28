@@ -1,6 +1,6 @@
-# Lets learn some basic queries to retrive data
+# Lets learn some basic queries to retrieve data
 
-Create a database named `wallets` (e.g. with phpmyadmin), and import the wallet_addr.sql
+Create a database named `wallets` and import the wallet_addr.sql file.
 
 Run the following queries while connected to the `wallets` database.
 Query the table `wallet_addr` in the database `wallets`
@@ -29,6 +29,9 @@ Note: in PostgreSQL, use `ILIKE` for case-insensitive matching.
 ```sql
 SELECT * FROM wallet_addr WHERE country = 'Greece' AND first_name ILIKE 'A%';
 ```
+Dialect note:
+- MySQL/MariaDB: `LIKE 'A%'` is often case-insensitive under default collations.
+- Microsoft SQL Server: `LIKE 'A%'` is case-insensitive under a CI collation.
 Show everybody from Greece or China
 ```sql
 SELECT * FROM wallet_addr WHERE country IN ('Greece', 'China');
