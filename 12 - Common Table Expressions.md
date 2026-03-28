@@ -24,10 +24,10 @@ Create the `customer_wallets` table:
 ```sql
 CREATE TABLE customer_wallets AS
 SELECT
-    customer_id AS `Customer ID`,
-    bitcoin_addr AS 'Wallet Address',
-    btc AS 'Balance',
-    date_of_creation AS 'Created At'
+    customer_id,
+    bitcoin_addr AS wallet_address,
+    btc AS balance,
+    date_of_creation AS created_at
 FROM
     wallet_addr;
 ```
@@ -40,28 +40,28 @@ Without a CTE:
 SELECT first_name, last_name
 FROM wallet_addr
 WHERE customer_id IN (
-    SELECT `Customer ID` FROM customer_wallets WHERE balance > 20499
+    SELECT customer_id FROM customer_wallets WHERE balance > 20499
 );
 ```
 With a CTE:
 ```sql
 WITH high_value_customers AS (
-    SELECT `Customer ID` FROM customer_wallets WHERE balance > 20499
+    SELECT customer_id FROM customer_wallets WHERE balance > 20499
 )
 SELECT first_name, last_name
 FROM wallet_addr
-WHERE customer_id IN (SELECT `Customer ID` FROM high_value_customers);
+WHERE customer_id IN (SELECT customer_id FROM high_value_customers);
 ```
 ### Example 2: Using Multiple CTEs
 ```sql
 WITH high_value_customers AS (
-    SELECT `Customer ID` FROM customer_wallets WHERE balance > 20499
+    SELECT customer_id FROM customer_wallets WHERE balance > 20499
 ),
 high_value_transactions AS (
     SELECT * FROM customer_wallets WHERE balance > 20499
 )
-SELECT * FROM high_value_customers JOIN high_value_transactions USING (`Customer ID`) 
-WHERE `Created At` BETWEEN '2020-01-01' AND '2023-01-01';
+SELECT * FROM high_value_customers JOIN high_value_transactions USING (customer_id)
+WHERE created_at BETWEEN '2020-01-01' AND '2023-01-01';
 ```
 ### Example 3: Recursive CTE for Hierarchical Data
 ```sql
@@ -99,7 +99,9 @@ SELECT * FROM cte;
 | Performance| ✅ Optimized in some cases| ✅ Sometimes faster for small queries|
 | Recursive Queries| ✅ Supported| ❌ Not possible|
 
-MySQL Version Requirement: MySQL 8.0 and above
+MySQL/MariaDB note: CTE support requires modern versions (MySQL 8.0+, MariaDB 10.2+).
+
+SQL Server note: recursive CTEs in Microsoft SQL Server are usually written with `WITH cte AS (...)` (without the `RECURSIVE` keyword).
 
 ### Conclusion
 CTEs improve query structure by breaking down complex logic.
