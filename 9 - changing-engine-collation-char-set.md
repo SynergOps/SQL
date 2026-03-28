@@ -1,39 +1,47 @@
-# Lets learn how to change the Collate, Character Set and storage engine in MySQL
+# Lets learn about collation, character set and storage engine
 
-First lets see the current character set and collate of the database and table of `some_database` and `some_table`
+This lesson uses PostgreSQL-safe defaults and shows alternatives only where syntax differs.
+
+## PostgreSQL-safe default
+
+Check database settings:
+
 ```sql
-SHOW CREATE DATABASE `the_database_name`;
-SHOW CREATE TABLE `the_database_name`.`the_table_name`;
+SELECT datname, datcollate, datctype
+FROM pg_database
+WHERE datname = current_database();
 ```
-Now lets change the character set and collate of the database
+
+Check column collations in a table:
+
 ```sql
-ALTER DATABASE `the_database_name`
-DEFAULT CHARACTER SET utf8mb4
-DEFAULT COLLATE utf8mb4_general_ci;
+SELECT table_schema, table_name, column_name, collation_name
+FROM information_schema.columns
+WHERE table_name = 'wallet_addr';
 ```
-lets see the current storage engine of the table
+
+Set collation for a text column:
+
 ```sql
-SHOW TABLE STATUS FROM the_database_name WHERE Name = 'the_table_name';
+ALTER TABLE wallet_addr
+ALTER COLUMN country TYPE text COLLATE "C";
 ```
-Now lets change the storage engine of the table
-```sql
-ALTER TABLE the_database_name.the_table_name ENGINE = InnoDB;
-```
-Now lets see the current storage engine of the table
-```sql
-SHOW TABLE STATUS FROM the_database_name WHERE Name = 'the_table_name';
-```
-Now lets change the character set and collate of the table
-```sql
-ALTER TABLE the_database_name.the_table_name 
-COLLATE=utf8mb4_general_ci;
-```
-Now lets see the current character set and collate of the table
-```sql
-SHOW CREATE TABLE `the_database_name`.`the_table_name`;
-```
-# conclusion:
-We can change the character set, collate and storage engine of the database 
-and table in MySQL using the above commands. Caution should be taken while changing the 
-character set and collate as it may affect the data in the table. For example if the
-character set is changed from latin1 to utf8mb4 then the data in the table may be corrupted.
+
+## Dialect notes (only where different)
+
+- MySQL/MariaDB:
+	- You can set character set/collation at database and table level:
+	- `ALTER DATABASE db_name DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;`
+	- `ALTER TABLE db_name.table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`
+	- Storage engine is configurable per table (e.g. `ENGINE=InnoDB`).
+
+- Microsoft SQL Server:
+	- Collation can be set per database/column:
+	- `ALTER DATABASE db_name COLLATE Latin1_General_100_CI_AS;`
+	- `ALTER TABLE t ALTER COLUMN c NVARCHAR(100) COLLATE Latin1_General_100_CI_AS;`
+	- There is no MySQL-style pluggable table engine option.
+
+## Conclusion
+
+Collation and character set decisions affect sorting, comparison, and indexing behavior.
+Always test changes on staging data before applying them in production.
