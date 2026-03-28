@@ -1,69 +1,63 @@
-# Lets learn about computed columns in MySQL
+# Lets learn about computed columns
 
-Computed columns are columns that are not stored in the table but are computed on the fly
-They are calculated based on other columns in the table
-They are useful when you want to calculate a value based on other columns 
-and you don't want to store that value in the table
+Computed columns are values derived from other columns.
+For portability, use two patterns:
 
-They are also useful when you want to create an index on a column that is computed
-Lets see an example with our `customer_wallets` MySQL table where we want to calculate how many years old is 
-the wallet address based on the creation date that is stored in the `Created At` column
+1. Generated column for deterministic expressions.
+2. Regular column + periodic `UPDATE` for time-based values that depend on the current date.
 
-If you already have the `customer_wallets` table, from the previous sections then you can skip the following part.
-If not, you can create the `customer_wallets` table using the following SQL statement using columns from the `wallet_addr` table.
-
-Create the customer_wallets table:
+If you already have the `customer_wallets` table, skip this part.
 
 ```sql
 CREATE TABLE customer_wallets AS
 SELECT
-    customer_id AS `Customer ID`,
-    bitcoin_addr AS 'Wallet Address',
-    btc AS 'Balance',
-    date_of_creation AS 'Created At'
-FROM
-    wallet_addr;
+  customer_id,
+  bitcoin_addr AS wallet_address,
+  btc AS balance,
+  date_of_creation AS created_at
+FROM wallet_addr;
 ```
 
-Now we have the `customer_wallets` MySQL table with the following columns lets add a 
-new column `Years Old` that will calculate how many years old is the wallet address based on the `Created At` column
+## PostgreSQL-safe example (time-based age)
 
-Note that MySQL does not allow non-deterministic functions (like CURDATE()) in generated columns. 
-Unfortunately, this means you cannot use a generated column to automatically update Years Old based on the current date.
+Because age changes over time, keep it in a regular column and refresh it.
 
-Since a generated column won't work, you should:
-
-1. Add a regular Years Old column
-1. Use an UPDATE query to calculate the age
-1. (Optional) Create an event scheduler to update it automatically
-
-Add the `Years Old` column to the `customer_wallets` table
 ```sql
-ALTER TABLE customer_wallets 
-ADD COLUMN `Years Old` INT;
+ALTER TABLE customer_wallets
+ADD COLUMN years_old INT;
 ```
-Update the `Years Old` column with the age of the wallet address
+
 ```sql
-UPDATE customer_wallets 
-SET `Years Old` = TIMESTAMPDIFF(YEAR, `Created At`, CURDATE());
+UPDATE customer_wallets
+SET years_old = DATE_PART('year', AGE(CURRENT_DATE, created_at));
 ```
-Now you can see the `Years Old` column in the `customer_wallets` table
+
 ```sql
 SELECT * FROM customer_wallets;
 ```
-(Optional): Automate Updates Using MySQL Event Scheduler
-If you want Years Old to update automatically daily, you can create a scheduled event:
+
+## Optional automation
+
+Use your scheduler of choice (cron, pg_cron, SQL Agent, event scheduler) to run the `UPDATE` daily.
+
+## Dialect notes (only where different)
+
+- MySQL/MariaDB equivalent age update:
 ```sql
-CREATE EVENT update_wallet_age
-ON SCHEDULE EVERY 1 DAY
-DO
-  UPDATE customer_wallets 
-  SET `Years Old` = TIMESTAMPDIFF(YEAR, `Created At`, CURDATE());
+UPDATE customer_wallets
+SET years_old = TIMESTAMPDIFF(YEAR, created_at, CURDATE());
 ```
-This ensures that Years Old stays updated without manual intervention. Enable the MySQL Event Scheduler (if it's not enabled)
-Before using events, make sure the MySQL event scheduler is enabled:
+
+- Microsoft SQL Server equivalent age update:
 ```sql
-SET GLOBAL event_scheduler = ON;
+UPDATE customer_wallets
+SET years_old = DATEDIFF(YEAR, created_at, CAST(GETDATE() AS date))
+         - CASE
+           WHEN DATEADD(YEAR, DATEDIFF(YEAR, created_at, CAST(GETDATE() AS date)), created_at)
+            > CAST(GETDATE() AS date)
+           THEN 1
+           ELSE 0
+         END;
 ```
- Why is this necessary?
-MySQL does not allow CURDATE() in generated columns because the value would change dynamically over time. The event scheduler is the best alternative to keep it updated automatically
+
+Note: `DATEDIFF(YEAR, ...)` in SQL Server counts year boundaries, so the adjustment above gives full years.
