@@ -1,6 +1,7 @@
 # Lets learn about SQL Views
 
-Create a database named `wallets`, and import the wallet_addr.sql file.
+Create a database named `wallets`, and import the `wallet_addr.portable.sql` file.
+If you run MySQL/MariaDB specifically, use `wallet_addr.mysql.sql`.
 Use the new imported database (`wallets`).
 A view is a virtual table based on the result-set of an SQL statement.
 - A view contains rows and columns, just like a real table. 

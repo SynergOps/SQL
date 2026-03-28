@@ -39,12 +39,24 @@ This repository assumes that you know how to install an RDBMS and use a SQL clie
 2. **Set Up a Database**
    - Install PostgreSQL, MySQL, MariaDB, or Microsoft SQL Server
    - Create a new database or use an existing one
-   - Import the provided SQL file (`wallet_addr.sql`) into your database
+   - Import the portable seed file (`wallet_addr.portable.sql`) into your database
+   - If you use MySQL/MariaDB, you can use the native dump wrapper (`wallet_addr.mysql.sql`)
 
 ## SQL Dialect Approach
 
 - The lessons use a PostgreSQL-safe default syntax.
 - Where syntax differs, a short alternative is provided for MySQL/MariaDB and Microsoft SQL Server.
+
+## SQL Dump Naming
+
+- `*.portable.sql`: cross-dialect, PostgreSQL-safe seed/schema scripts
+- `*.mysql.sql`: MySQL/MariaDB-native dump entry files
+- Legacy dump filenames are currently kept for compatibility and are referenced by the `*.mysql.sql` wrappers.
+
+Current mapping:
+- `wallet_addr.sql` -> `wallet_addr.mysql.sql`
+- `iekstudents.sql` -> `iekstudents.mysql.sql`
+- `world-db/world.sql` -> `world-db/world.mysql.sql`
 
 ## License
 
