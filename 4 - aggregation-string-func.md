@@ -68,6 +68,10 @@ Putting it all together:
 
 This combination of functions is often used to generate a short, random string.
 
+Dialect note:
+- MySQL/MariaDB: use `SUBSTRING(MD5(RAND()), 1, 5)`.
+- Microsoft SQL Server: use `SUBSTRING(CONVERT(varchar(32), HASHBYTES('MD5', CAST(RAND() AS varchar(50))), 2), 1, 5)`.
+
 LEFT, RIGHT, and MID
 Write a query that returns the first 3 characters of the first name of each wallet_addr in the wallet_addr table.
 ```sql
@@ -81,6 +85,9 @@ Write a query that returns the 4th to 6th characters of the first name of each w
 ```sql
 SELECT SUBSTRING(first_name FROM 4 FOR 3) AS fourth_to_sixth_characters_of_first_name FROM wallet_addr;
 ```
+Dialect note:
+- MySQL/MariaDB: `SUBSTRING(first_name, 4, 3)`
+- Microsoft SQL Server: `SUBSTRING(first_name, 4, 3)`
 Lowercase and Uppercase
 Write a query that returns the first name of each wallet_addr in lowercase.
 ```sql

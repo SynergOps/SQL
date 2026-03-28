@@ -1,4 +1,4 @@
-# Lets how to manage tables
+# Lets learn how to manage tables
 
 Use the previously imported database (`wallets`).
 Show everybody from Greece with more than 500 BTC with named columns
@@ -54,6 +54,9 @@ SELECT
 FROM
     wallet_addr;
 ```
+Dialect note:
+- MySQL/MariaDB: replace identity with `id INT AUTO_INCREMENT PRIMARY KEY`.
+- Microsoft SQL Server: replace identity with `id INT IDENTITY(1,1) PRIMARY KEY`.
 Delete data from the table `wallet_addr_plus_100` where name starts with 'Cl'
 ```sql
 DELETE FROM wallet_addr_plus_100 WHERE first_name LIKE 'Cl%';

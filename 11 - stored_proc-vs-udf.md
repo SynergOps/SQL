@@ -28,7 +28,7 @@ complexity depending on the function type.
 
 4. **Security and Permissions:**
    - Both require specific permissions to execute, but access can differ—stored procedures are
-often accessed via `EXEC`, while UDFs may need direct calls or schema access.
+often accessed via `CALL` or engine-specific execution syntax, while UDFs are invoked in expressions.
 
 5. **Maintenance and Scalability:**
    - **Stored Procedures:** May have different maintenance needs due to recompilation for
@@ -50,3 +50,7 @@ table-valued functions.
 The choice between stored procedures and UDFs hinges on how the logic will be used, its
 integration requirements, and architectural needs. Stored procedures offer centralized control
 for cross-application use, while UDFs provide embedded flexibility within the database schema.
+
+Dialect note:
+- PostgreSQL/MySQL/MariaDB commonly use `CALL` for procedures.
+- Microsoft SQL Server commonly uses `EXEC`.
