@@ -35,6 +35,16 @@ SELECT
     btc AS balance,
     date_of_creation AS created_at
 FROM wallet_addr;
+
+ALTER TABLE customer_wallets
+ADD CONSTRAINT customer_wallets_pk PRIMARY KEY (customer_id);
+
+ALTER TABLE customer_wallets
+ADD CONSTRAINT customer_wallets_customer_fk
+FOREIGN KEY (customer_id)
+REFERENCES wallet_addr(customer_id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 ```
 
 ## Example: enforce non-negative balance

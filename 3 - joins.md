@@ -20,6 +20,16 @@ SELECT
     date_of_creation AS created_at
 FROM
     wallet_addr;
+
+ALTER TABLE customer_wallets
+ADD CONSTRAINT customer_wallets_pk PRIMARY KEY (customer_id);
+
+ALTER TABLE customer_wallets
+ADD CONSTRAINT customer_wallets_customer_fk
+FOREIGN KEY (customer_id)
+REFERENCES wallet_addr(customer_id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 ```
 Lets delete the columns we don't need from `wallet_addr` (`bitcoin_addr`, `btc`, `date_of_creation`).
 Create a backup of the `wallet_addr` table before dropping columns.
