@@ -8,7 +8,7 @@ BEGIN;
 DROP TABLE IF EXISTS wallet_addr;
 
 CREATE TABLE wallet_addr (
-    customer_id INTEGER,
+    customer_id INTEGER PRIMARY KEY,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     email VARCHAR(50),

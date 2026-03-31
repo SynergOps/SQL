@@ -27,7 +27,7 @@ USE `wallets`;
 --
 
 CREATE TABLE `wallet_addr` (
-  `customer_id` int DEFAULT NULL,
+  `customer_id` int NOT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
@@ -38,7 +38,8 @@ CREATE TABLE `wallet_addr` (
   `postal_code` varchar(50) DEFAULT NULL,
   `date_of_creation` date DEFAULT NULL,
   `bitcoin_addr` varchar(50) DEFAULT NULL,
-  `btc` decimal(12,7) DEFAULT NULL
+  `btc` decimal(12,7) DEFAULT NULL,
+  PRIMARY KEY (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
