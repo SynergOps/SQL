@@ -1,8 +1,21 @@
 # Lets learn about SQL Views
 
-Create a database named `wallets`, and import the `wallet_addr.portable.sql` file.
-If you run MySQL/MariaDB specifically, use `wallet_addr.mysql.sql`.
-Use the new imported database (`wallets`).
+Use the previously imported database (`wallets`).
+If you already have the `customer_wallets` table from Lesson 3, skip the table creation step below. Otherwise, create it using:
+
+```sql
+CREATE TABLE customer_wallets AS
+SELECT
+    customer_id,
+    bitcoin_addr AS wallet_address,
+    btc AS balance,
+    date_of_creation AS created_at
+FROM wallet_addr;
+
+ALTER TABLE customer_wallets
+ADD CONSTRAINT customer_wallets_pk PRIMARY KEY (customer_id);
+```
+
 A view is a virtual table based on the result-set of an SQL statement.
 - A view contains rows and columns, just like a real table. 
 - The fields in a view are fields from one or more real tables in the database.
