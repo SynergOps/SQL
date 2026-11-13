@@ -8,7 +8,6 @@ A minimal educational example showing how to connect to a PostgreSQL database us
 
 ### 1. Clone the repository & enter the folder
 ```bash
-git clone <your-repo-url>
 cd py2postgresql
 ```
 
