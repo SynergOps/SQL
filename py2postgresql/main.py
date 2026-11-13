@@ -20,11 +20,11 @@ cur.execute("DROP TABLE IF EXISTS ui_user;")
 
 cur.execute("""
 CREATE TABLE IF NOT EXISTS "ui_user" (
-    id SERIAL PRIMARY KEY,
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(50),
     email VARCHAR(50),
     age INT,
-    gender CHAR
+    gender CHAR(1)
 );
 """)
 
