@@ -61,6 +61,7 @@ This repository assumes that you know how to install an RDBMS and use a SQL clie
 | 12 | Common Table Expressions | `wallet_addr` | CTEs, WITH clauses, recursive queries, readability |
 | 13 | World Database Queries | `world` | Multi-table joins, window functions, CTEs, complex filtering |
 | 14 | Student Records | `iekstudents` | Data quality, aggregation, reporting, practical scenarios |
+| 15 | Relational Integrity & Cascades | `photo-share` | Multi-level joins, self-references, subqueries, ON DELETE CASCADE |
 
 ## Available Datasets
 

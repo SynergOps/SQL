@@ -1,3 +1,9 @@
+BEGIN;
+
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS photos;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users(
   id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   username VARCHAR(50)
@@ -148,3 +154,4 @@ VALUES
         ('An incredible and moving piece of pure visual storytelling.', 5, 4),
         ('The editing style here suits the subject matter perfectly.', 5, 4),
         ('This photo radiates such wonderful energy and movement.', 3, 3);
+COMMIT;
