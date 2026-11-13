@@ -9,18 +9,18 @@ Create a new database and import the student dataset:
 ```bash
 # PostgreSQL
 createdb iekstudents
-psql iekstudents < iekstudents.portable.sql
+psql iekstudents < datasets/iekstudents/iekstudents.portable.sql
 
 # MySQL/MariaDB
 mysql -u root -p -e "CREATE DATABASE iekstudents;"
-mysql -u root -p iekstudents < iekstudents.mysql.sql
+mysql -u root -p iekstudents < datasets/iekstudents/iekstudents.mysql.sql
 ```
 
 Or in your SQL client:
 ```sql
 CREATE DATABASE iekstudents;
 USE iekstudents;
--- Then import iekstudents.portable.sql (PostgreSQL) or iekstudents.mysql.sql (MySQL/MariaDB)
+-- Then import datasets/iekstudents/iekstudents.portable.sql (PostgreSQL) or datasets/iekstudents/iekstudents.mysql.sql (MySQL/MariaDB)
 ```
 
 The database contains student information with meal preferences:
@@ -313,4 +313,4 @@ ORDER BY preference_type, count DESC;
 
 ---
 
-**Database imports:** Use `iekstudents.portable.sql` for all SQL dialects, or `iekstudents.mysql.sql` if using MySQL/MariaDB directly.
+**Database imports:** Use `datasets/iekstudents/iekstudents.portable.sql` for all SQL dialects, or `datasets/iekstudents/iekstudents.mysql.sql` if using MySQL/MariaDB directly.

@@ -4,16 +4,16 @@ Learn how relational databases enforce referential integrity using foreign keys,
 
 ## Setup
 
-Create a new database (or schema) and import `photo-share.sql`:
+Create a new database (or schema) and import `datasets/photo-share/photo-share.sql`:
 
 ```bash
 # PostgreSQL
 createdb photodb
-psql photodb < photo-share.sql
+psql photodb < datasets/photo-share/photo-share.sql
 
 # MySQL / MariaDB (note: adjust syntax for AUTO_INCREMENT if using raw MySQL client)
 mysql -u root -p -e "CREATE DATABASE photodb;"
-mysql -u root -p photodb < photo-share.sql
+mysql -u root -p photodb < datasets/photo-share/photo-share.sql
 ```
 
 The database models a photo-sharing platform with three interconnected tables:

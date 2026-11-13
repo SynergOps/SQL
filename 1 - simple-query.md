@@ -1,7 +1,7 @@
 # Lets learn some basic queries to retrieve data
 
-Create a database named `wallets` and import the `wallet_addr.portable.sql` file.
-If you run MySQL/MariaDB specifically, use `wallet_addr.mysql.sql`.
+Create a database named `wallets` and import the `datasets/wallet_addr/wallet_addr.portable.sql` file.
+If you run MySQL/MariaDB specifically, use `datasets/wallet_addr/wallet_addr.mysql.sql`.
 
 Run the following queries while connected to the `wallets` database.
 Query the table `wallet_addr` in the database `wallets`

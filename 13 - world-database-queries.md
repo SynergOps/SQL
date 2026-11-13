@@ -9,18 +9,18 @@ Create a new database and import the World dataset:
 ```bash
 # PostgreSQL
 createdb world
-psql world < world-db/world.portable.sql
+psql world < datasets/world/world.portable.sql
 
 # MySQL/MariaDB
 mysql -u root -p -e "CREATE DATABASE world;"
-mysql -u root -p world < world-db/world.mysql.sql
+mysql -u root -p world < datasets/world/world.mysql.sql
 ```
 
 Or in your SQL client:
 ```sql
 CREATE DATABASE world;
 USE world;
--- Then import world-db/world.portable.sql (PostgreSQL) or world-db/world.mysql.sql (MySQL/MariaDB)
+-- Then import datasets/world/world.portable.sql (PostgreSQL) or datasets/world/world.mysql.sql (MySQL/MariaDB)
 ```
 
 The database contains three main tables:
@@ -275,4 +275,4 @@ ORDER BY ca.city_count DESC;
 
 ---
 
-**Database imports:** Use `world-db/world.portable.sql` for all SQL dialects, or `world-db/world.mysql.sql` if using MySQL/MariaDB directly.
+**Database imports:** Use `datasets/world/world.portable.sql` for all SQL dialects, or `datasets/world/world.mysql.sql` if using MySQL/MariaDB directly.
