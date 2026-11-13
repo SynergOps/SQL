@@ -101,10 +101,10 @@ LEFT JOIN customer_wallets cw ON
 OUTER RIGHT JOIN
 This query retrieves the first name, last name, wallet address, and balance for each customer
 If a customer does not have a wallet, the first name and last name will be NULL
-So lets delete some first names and last names from the wallet_addr table to simulate a situation
-where some customers do not have postal codes.
+So lets set some first names and last names to NULL in the wallet_addr table to simulate a situation
+where some customer profile data is missing.
 
-Empty some rows from the wallet_addr table where postal code is Null
+Set names to NULL in the wallet_addr table where postal code is NULL
 
 ```sql
 UPDATE
@@ -143,5 +143,19 @@ SELECT
     cw.balance
 FROM
     wallet_addr wa
-CROSS JOIN customer_wallets cw
+CROSS JOIN customer_wallets cw;
+```
+
+---
+
+## Restoring Table for Future Lessons
+
+In this lesson, we dropped several columns from `wallet_addr` (`btc`, `bitcoin_addr`, `date_of_creation`) and altered rows to demonstrate joins. Subsequent lessons require the complete `wallet_addr` table with balance information intact, while keeping `customer_wallets` for lessons on views, CTEs, and procedures.
+
+Restore `wallet_addr` from our backup:
+
+```sql
+DROP TABLE wallet_addr;
+CREATE TABLE wallet_addr AS SELECT * FROM wallet_addr_backup;
+ALTER TABLE wallet_addr ADD PRIMARY KEY (customer_id);
 ```
