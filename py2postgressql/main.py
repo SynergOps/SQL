@@ -30,11 +30,11 @@ CREATE TABLE IF NOT EXISTS "ui_user" (
 
 cur.execute("""
 INSERT INTO ui_user (name, email, age, gender) VALUES
-('Salih', '[EMAIL_ADDRESS]', 24, 'M'),
-('Mina', '[EMAIL_ADDRESS]', 24, 'F'),
-('Mike', '[EMAIL_ADDRESS]', 35, 'M'),
-('Jordan', '[EMAIL_ADDRESS]', 40, 'F'),
-('Mark', '[EMAIL_ADDRESS]', 45, 'M');
+('Salih', 'salih@example.com', 24, 'M'),
+('Mina', 'mina@example.com', 24, 'F'),
+('Mike', 'mike@example.com', 35, 'M'),
+('Jordan', 'jordan@example.com', 40, 'F'),
+('Mark', 'mark@example.com', 45, 'M');
 """)
 
 #cur.execute("SELECT * FROM ui_user;")  # Fetch all rows
