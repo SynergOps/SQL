@@ -123,20 +123,34 @@ ORDER BY age;
 
 ### Students by age group
 
+Using a CTE (Common Table Expression) allows calculating the age group once and grouping by the named column across all SQL dialects:
+
 ```sql
+WITH student_ages AS (
+    SELECT 
+        id,
+        name,
+        CASE 
+            WHEN EXTRACT(YEAR FROM AGE(CURRENT_DATE, birthdate)) < 18 THEN 'Under 18'
+            WHEN EXTRACT(YEAR FROM AGE(CURRENT_DATE, birthdate)) < 21 THEN '18-20'
+            WHEN EXTRACT(YEAR FROM AGE(CURRENT_DATE, birthdate)) < 25 THEN '21-24'
+            ELSE '25+'
+        END AS age_group
+    FROM dinners
+    WHERE birthdate IS NOT NULL
+)
 SELECT 
-    CASE 
-        WHEN EXTRACT(YEAR FROM AGE(CURRENT_DATE, birthdate)) < 18 THEN 'Under 18'
-        WHEN EXTRACT(YEAR FROM AGE(CURRENT_DATE, birthdate)) < 21 THEN '18-20'
-        WHEN EXTRACT(YEAR FROM AGE(CURRENT_DATE, birthdate)) < 25 THEN '21-24'
-        ELSE '25+'
-    END AS age_group,
+    age_group,
     COUNT(*) AS student_count
-FROM dinners
-WHERE birthdate IS NOT NULL
+FROM student_ages
 GROUP BY age_group
 ORDER BY age_group;
 ```
+
+**Dialect note:**
+- PostgreSQL requires either grouping by the full `CASE` expression or using a subquery/CTE (PostgreSQL does not allow grouping directly by output column aliases defined in `SELECT`).
+- In MySQL/MariaDB, `GROUP BY age_group` on the alias is supported natively.
+
 
 ## Data Quality Checks
 
