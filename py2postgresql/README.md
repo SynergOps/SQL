@@ -6,7 +6,7 @@ A minimal educational example showing how to connect to a PostgreSQL database us
 
 ## Getting Started
 
-### 1. Clone the repository & enter the folder
+### 1. Enter the folder
 ```bash
 cd py2postgresql
 ```

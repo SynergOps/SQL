@@ -64,9 +64,11 @@ This repository assumes that you know how to install an RDBMS and use a SQL clie
 
 ## Available Datasets
 
-- **`wallet_addr`** (GetRekt Bitcoin custody scenario): 12 sample customers with wallet addresses and balances
+- **`wallet_addr`** (GetRekt Bitcoin custody scenario): 1,000 customers with wallet addresses and balances
 - **`world`** (Geography/demographics): 239 countries, ~4,000 cities, language data
 - **`iekstudents`** (Student meal preferences): Sample student records with dining preferences
+- **`ecommerce_simulation_greek`** (E-commerce store): 50 users, 100 products, ~550 orders (Greek data)
+- **`photo-share`** (Photo-sharing social platform): Users, photos, and comments with cascading foreign keys
 
 ## SQL Dialect Approach
 
