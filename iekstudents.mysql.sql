@@ -39,7 +39,6 @@ CREATE TABLE `dinners` (
 --
 -- Dumping data for table `dinners`
 --
-DROP TABLE IF EXISTS `tourneys`;
 INSERT INTO `dinners` (`id`, `name`, `birthdate`, `entree`, `side`, `dessert`) VALUES
 (1, 'Manolis', '2003-01-19', 'steak', 'salad', 'cake'),
 (2, 'Thanos', '2003-01-25', 'chicken', 'fries', 'ice cream'),
